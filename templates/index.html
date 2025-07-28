@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Fraud Transaction Detector</h2>
+        <form method="POST" action="/predict">
+
+            <label for="TRANSACTION_ID">Transaction ID</label>
+            <input type="text" id="TRANSACTION_ID" name="TRANSACTION_ID" placeholder="e.g. T10001" required>
+
+            <label for="CUSTOMER_ID">Customer ID</label>
+            <input type="text" id="CUSTOMER_ID" name="CUSTOMER_ID" placeholder="e.g. C201" required>
+
+            <label for="TERMINAL_ID">Terminal ID</label>
+            <input type="text" id="TERMINAL_ID" name="TERMINAL_ID" placeholder="e.g. TM901" required>
+
+            <label for="TX_DATETIME">Transaction Date & Time</label>
+            <input type="datetime-local" id="TX_DATETIME" name="TX_DATETIME" required>
+
+            <label for="TX_AMOUNT">Transaction Amount (€)</label>
+            <input type="number" step="0.01" id="TX_AMOUNT" name="TX_AMOUNT" placeholder="e.g. 120.50" required>
+
+            <label for="TX_TIME_SECONDS">TX Time (Seconds)</label>
+            <input type="number" step="1" id="TX_TIME_SECONDS" name="TX_TIME_SECONDS" placeholder="e.g. 45200" required>
+
+            <label for="TX_TIME_DAYS">TX Time (Days)</label>
+            <input type="number" step="0.01" id="TX_TIME_DAYS" name="TX_TIME_DAYS" placeholder="e.g. 1.45" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <h3 class="prediction {{ css_class }}">{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
